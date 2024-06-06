@@ -36,9 +36,9 @@ const checkSubmit = () => {
     !isCorrectPhoneNumber(telefono.value) ||
     telefono.value === "" ||
     (CP.required && (CP.value === "" || CP.value.length !== 5)) ||
-    (estado.required && estado.value) === "" ||
-    (alcMun.required && alcMun.value) === "" ||
-    (calle.required && calle.value) === "" ||
+    (estado.required && estado.value === "") ||
+    (alcMun.required && alcMun.value === "") ||
+    (calle.required && calle.value === "") ||
     (nExt.required && nExt.value === "")
   )
     submitForm.disabled = true;
@@ -154,6 +154,7 @@ nInt.addEventListener("input", function (e) {
 
 serDomSi.addEventListener("change", function (e) {
   if (this.checked) {
+    calle.required = true;
     nExt.required = true;
     CP.required = true;
     checkSubmit();
@@ -163,6 +164,7 @@ serDomSi.addEventListener("change", function (e) {
 
 serDomNo.addEventListener("change", function (e) {
   if (this.checked) {
+    calle.required = false;
     nExt.required = false;
     CP.required = false;
     checkSubmit();
@@ -171,7 +173,6 @@ serDomNo.addEventListener("change", function (e) {
 });
 
 CP.addEventListener("input", function (e) {
-  checkSubmit();
   errorCP.textContent = CP.value === "" ? "Campo obligatorio" : "";
   if (this.value.length === 5) {
     colonias.innerHTML = "";
@@ -184,12 +185,13 @@ CP.addEventListener("input", function (e) {
       if (xhr.status === 200) {
         errorCP.textContent = "";
         let data = xhr.response;
-
+        submitForm.disabled = false;
         if (data.length === 0) {
           errorCP.textContent = "El CP ingresado no existe";
           loaderContainer.style.display = "none";
           clearServDom();
           checkSubmit();
+          submitForm.disabled = true;
           return;
         }
 
