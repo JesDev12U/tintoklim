@@ -15,13 +15,27 @@ const submitForm = document.getElementById("submit-form");
 const serDomSi = document.getElementById("ser-dom-si");
 const serDomNo = document.getElementById("ser-dom-no");
 
+const errorNom = document.getElementById("error-nom");
+const errorApellidos = document.getElementById("error-apellidos");
+const errorCorreo = document.getElementById("error-correo");
+const errorTelefono = document.getElementById("error-telefono");
+const errorCalle = document.getElementById("error-calle");
+const errorNExt = document.getElementById("error-n-ext");
+const errorCP = document.getElementById("error-cp");
+
+const loaderContainer = document.querySelector(".loader-container");
+
+const servDomContainer = document.querySelector(".serv-dom-container");
+
 const checkSubmit = () => {
   if (
     nombre.value === "" ||
     apellidos.value === "" ||
-    correoE === "" ||
-    telefono === "" ||
-    (CP.required && CP.value) === "" ||
+    !isCorrectEmail(correoE.value) ||
+    correoE.value === "" ||
+    !isCorrectPhoneNumber(telefono.value) ||
+    telefono.value === "" ||
+    (CP.required && (CP.value === "" || CP.value.length !== 5)) ||
     (estado.required && estado.value) === "" ||
     (alcMun.required && alcMun.value) === "" ||
     (calle.required && calle.value) === "" ||
@@ -36,6 +50,16 @@ const formatStr = (str) =>
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .toUpperCase();
+
+const isCorrectEmail = (email) => {
+  const regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+  return regex.test(email);
+};
+
+const isCorrectPhoneNumber = (phone) => {
+  const regex = /^\d{10}$/;
+  return regex.test(phone);
+};
 
 const clearServDom = () => {
   estado.value = "";
@@ -54,16 +78,58 @@ CP.addEventListener("keypress", function (e) {
 nombre.addEventListener("input", function (e) {
   this.value = formatStr(this.value);
   checkSubmit();
+
+  if (this.value.length > 60) {
+    this.value = this.value.slice(0, 60);
+  }
+  errorNom.textContent = nombre.value === "" ? "Campo obligatorio" : "";
 });
 
 apellidos.addEventListener("input", function (e) {
   this.value = formatStr(this.value);
   checkSubmit();
+
+  if (this.value.length > 60) {
+    this.value = this.value.slice(0, 60);
+  }
+  errorApellidos.textContent =
+    apellidos.value === "" ? "Campo obligatorio" : "";
+});
+
+correoE.addEventListener("input", function (e) {
+  if (this.value.length > 60) {
+    this.value = this.value.slice(0, 60);
+  }
+  checkSubmit();
+  errorCorreo.textContent =
+    correoE.value === ""
+      ? "Campo obligatorio"
+      : !isCorrectEmail(correoE.value)
+      ? "Correo inválido, formato requerido: usuario@dominio.ext"
+      : "";
+});
+
+telefono.addEventListener("input", function (e) {
+  if (this.value.length > 10) {
+    this.value = this.value.slice(0, 10);
+  }
+  checkSubmit();
+  errorTelefono.textContent =
+    telefono.value === ""
+      ? "Campo obligatorio"
+      : !isCorrectPhoneNumber(telefono.value)
+      ? "Teléfono inválido, este debe ser de 10 dígitos"
+      : "";
 });
 
 calle.addEventListener("input", function (e) {
+  if (this.value.length > 30) {
+    this.value = this.value.slice(0, 30);
+  }
   this.value = formatStr(this.value);
   checkSubmit();
+
+  errorCalle.textContent = calle.value === "" ? "Campo obligatorio" : "";
 });
 
 nExt.addEventListener("keypress", function (e) {
@@ -73,6 +139,8 @@ nExt.addEventListener("keypress", function (e) {
 nExt.addEventListener("input", function (e) {
   this.value = formatStr(this.value);
   checkSubmit();
+
+  errorNExt.textContent = nExt.value === "" ? "Campo obligatorio" : "";
 });
 
 nInt.addEventListener("keypress", function (e) {
@@ -87,19 +155,24 @@ nInt.addEventListener("input", function (e) {
 serDomSi.addEventListener("change", function (e) {
   if (this.checked) {
     nExt.required = true;
+    CP.required = true;
     checkSubmit();
+    servDomContainer.classList.add("visible");
   }
 });
 
 serDomNo.addEventListener("change", function (e) {
   if (this.checked) {
     nExt.required = false;
+    CP.required = false;
     checkSubmit();
+    servDomContainer.classList.remove("visible");
   }
 });
 
 CP.addEventListener("input", function (e) {
   checkSubmit();
+  errorCP.textContent = CP.value === "" ? "Campo obligatorio" : "";
   if (this.value.length === 5) {
     colonias.innerHTML = "";
     let xhr = new XMLHttpRequest();
@@ -107,11 +180,14 @@ CP.addEventListener("input", function (e) {
     xhr.responseType = "json";
 
     xhr.onload = function () {
+      loaderContainer.style.display = "flex";
       if (xhr.status === 200) {
+        errorCP.textContent = "";
         let data = xhr.response;
 
         if (data.length === 0) {
-          alert("No se encontró el código postal");
+          errorCP.textContent = "El CP ingresado no existe";
+          loaderContainer.style.display = "none";
           clearServDom();
           checkSubmit();
           return;
@@ -126,8 +202,14 @@ CP.addEventListener("input", function (e) {
         });
         checkSubmit();
       } else {
-        console.error("Error: " + xhr.status);
+        errorCP.textContent("Error: " + xhr.status);
       }
+      loaderContainer.style.display = "none";
+    };
+
+    xhr.onerror = function () {
+      loaderContainer.style.display = "none";
+      errorCP.textContent("Error en la solicitud al servidor");
     };
 
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

@@ -12,7 +12,38 @@ body {
     align-items: center;
     padding: 10px;
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    overflow-y: hidden;
 }
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.loader-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4d4d4d7e;
+    position: fixed;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} 
 
 .container {
     max-width: 700px;
@@ -61,7 +92,7 @@ form .serv-dom-container .input-box {
 
 .user-details .input-box input,
 .serv-dom-container .input-box input {
-    height: 45px;
+    height: 35px;
     width: 100%;
     outline: none;
     border-radius: 5px;
@@ -135,9 +166,15 @@ form .button input {
 
 form .button input:hover {
     background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+    cursor: pointer;
 }
 
-@media (max-width: 584px) {
+form .button input:disabled {
+    background: linear-gradient(-135deg, #adadad, #4d4d4d);
+    cursor: not-allowed;
+}
+
+@media (max-width: 584px), (max-height: 765px) {
     .container {
         max-width: 100%;
     }
@@ -152,13 +189,31 @@ form .button input:hover {
         width: 100%;
     }
 
-    .container form .user-details,
-    .serv-dom-container {
+    .container form {
         max-height: 300px;
         overflow-y: scroll;
     }
 
-    .user-details::-webkit-scrollbar {
+    .container::-webkit-scrollbar {
         width: 0;
     }
+}
+
+.label-error {
+    color: red;
+    font-size: 0.8em;
+}
+
+.serv-dom-container {
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.7s;
+}
+
+.serv-dom-container.visible {
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+    transition: all 0.7s;
 }

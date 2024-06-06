@@ -7,25 +7,33 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <div class="loader-container" style="display: none">
+      <span class="loader"></span>
+    </div>
     <div class="container">
-      <div class="title">Registro de clientes</div>
+      <div class="title">Tintoklim | Registro de clientes</div>
+      <h5>Los campos con * son obligatorios</h5>
       <form action="" method="POST">
         <div class="user-details">
           <div class="input-box">
-            <span class="details">Nombre(s)</span>
+            <span class="details">Nombre(s) *</span>
             <input type="text" name="nombre_cte" id="nombre" required />
+            <label class="label-error" id="error-nom"></label>
           </div>
           <div class="input-box">
-            <span class="details">Apellido(s)</span>
+            <span class="details">Apellido(s) *</span>
             <input type="text" name="apellido_cte" id="apellidos" required />
+            <label class="label-error" id="error-apellidos"></label>
           </div>
           <div class="input-box">
-            <span class="details">Correo electrónico</span>
+            <span class="details">Correo electrónico *</span>
             <input type="text" name="correo_cte" id="correo-e" required />
+            <label class="label-error" id="error-correo"></label>
           </div>
           <div class="input-box">
-            <span class="details">Teléfono</span>
+            <span class="details">Teléfono *</span>
             <input type="text" name="telefono_cte" id="telefono" required />
+            <label class="label-error" id="error-telefono"></label>
           </div>
           <div class="serv-dom">
             <input
@@ -41,7 +49,7 @@
               id="ser-dom-no"
               checked
             />
-            <div class="serv-dom-title">Servicio a domicilio</div>
+            <div class="serv-dom-title">Servicio a domicilio *</div>
             <div class="decision-container">
               <label for="ser-dom-si">
                 <span class="dot one"></span>
@@ -57,32 +65,35 @@
 
         <div class="serv-dom-container">
           <div class="input-box">
-            <span class="details">Código postal</span>
-            <input type="text" name="cp-cte" id="cp" />
-          </div>
-          <div class="input-box">
-            <span class="details">Estado</span>
-            <input type="text" name="estado_cte" id="estado" readonly />
-          </div>
-          <div class="input-box">
-            <span class="details">Alcaldía/Municipio</span>
-            <input type="text" name="alc_mun_cte" id="alc-mun" readonly />
-          </div>
-          <div class="input-box">
-            <span class="details">Colonia</span>
-            <select name="col_cte" id="colonia"></select>
-          </div>
-          <div class="input-box">
-            <span class="details">Calle</span>
+            <span class="details">Calle *</span>
             <input type="text" name="calle_cte" id="calle" />
+            <label class="label-error" id="error-calle"></label>
           </div>
           <div class="input-box">
-            <span class="details">Número exterior</span>
+            <span class="details">Número exterior *</span>
             <input type="text" name="no_ext_cte" id="n-ext" />
+            <label class="label-error" id="error-n-ext"></label>
           </div>
           <div class="input-box">
             <span class="details">Número interior</span>
             <input type="text" name="no_int_cte" id="n-int" />
+          </div>
+          <div class="input-box">
+            <span class="details">Código postal *</span>
+            <input type="text" name="cp-cte" id="cp" />
+            <label class="label-error" id="error-cp"></label>
+          </div>
+          <div class="input-box">
+            <span class="details">Estado *</span>
+            <input type="text" name="estado_cte" id="estado" readonly />
+          </div>
+          <div class="input-box">
+            <span class="details">Alcaldía/Municipio *</span>
+            <input type="text" name="alc_mun_cte" id="alc-mun" readonly />
+          </div>
+          <div class="input-box">
+            <span class="details">Colonia *</span>
+            <select name="col_cte" id="colonia"></select>
           </div>
         </div>
         <div class="button">
