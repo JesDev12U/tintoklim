@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro | Tintoklim</title>
+  </head>
+  <body>
+    <h1>Registro de clientes</h1>
+    <form action="" method="POST">
+      <label>Nombre(s)</label>
+      <input type="text" name="nombre_cte" id="nombre" required />
+      <label>Apellido(s)</label>
+      <input type="text" name="apellido_cte" id="apellidos" required />
+      <label>Correo electrónico</label>
+      <input type="text" name="correo_cte" id="correo-e" required />
+      <label>Teléfono</label>
+      <input type="text" name="telefono_cte" id="telefono" required />
+      <label>Servicio a domicilio</label>
+      <label>
+        <input type="radio" name="ser_dom_cte" value="true" id="ser-dom-si" />
+        Si
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="ser_dom_cte"
+          value="false"
+          id="ser-dom-no"
+          checked
+        />
+        No
+      </label>
+      <div class="serv-dom-container">
+        <label>Código postal</label>
+        <input type="text" name="cp-cte" id="cp" />
+        <label>Estado</label>
+        <input type="text" name="estado_cte" id="estado" readonly />
+        <label>Alcaldía/Municipio</label>
+        <input type="text" name="alc_mun_cte" id="alc-mun" readonly />
+        <label>Colonia</label>
+        <select name="col_cte" id="colonia"></select>
+        <label>Calle</label>
+        <input type="text" name="calle_cte" id="calle" />
+        <label>Número exterior</label>
+        <input type="text" name="no_ext_cte" id="n-ext" />
+        <label>Número interior</label>
+        <input type="text" name="no_int_cte" id="n-int" />
+      </div>
+      <input type="submit" value="Registrar" id="submit-form" />
+    </form>
+    <script src="./script.js"></script>
+  </body>
+</html>
