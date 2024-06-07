@@ -230,7 +230,7 @@ button {
 }
 
 form .button input:disabled,
-button {
+button:disabled {
     background: linear-gradient(-135deg, #adadad, #4d4d4d);
     cursor: not-allowed;
 }

@@ -40,7 +40,7 @@ $submitForm.addEventListener("click", (e) => {
   xhr.responseType = "json";
 
   xhr.onload = function () {
-    $loaderContainer.style.display = "none";
+    $loaderContainer.style.display = "flex";
     if (xhr.status === 200) {
       let data = xhr.response;
       if (data && data.registro_exitoso) {
@@ -69,6 +69,7 @@ $submitForm.addEventListener("click", (e) => {
         $avisoFracaso.classList.remove("visible");
       }, 4000);
     }
+    $loaderContainer.style.display = "none";
   };
 
   xhr.onerror = function () {
@@ -86,7 +87,7 @@ $submitForm.addEventListener("click", (e) => {
   data.append("apellido_cte", $apellidos.value);
   data.append("telefono_cte", $telefono.value);
   data.append("correo_cte", $correoE.value);
-  data.append("ser_dom_cte", $serDomSi.checked ? "true" : "false");
+  data.append("ser_dom_cte", $serDomSi.checked);
   data.append("cp_cte", $CP.value || "");
   data.append("estado_cte", $estado.value || "");
   data.append("alc_mun_cte", $alcMun.value || "");
@@ -97,5 +98,5 @@ $submitForm.addEventListener("click", (e) => {
 
   $loaderContainer.style.display = "flex";
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xhr.send(data.toString());
+  xhr.send(data);
 });

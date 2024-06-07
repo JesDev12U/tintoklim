@@ -1,4 +1,5 @@
 <?php
+$ser_dom_cte = $_POST["ser_dom_cte"] === "true" ? 1 : 0;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -14,12 +15,12 @@ if (isset($_POST["nombre_cte"])) {
 
         if ($stmt) {
             $stmt->bind_param(
-                "ssssssssssss",
+                "ssssisssssss",
                 $_POST["nombre_cte"],
                 $_POST["apellido_cte"],
                 $_POST["telefono_cte"],
                 $_POST["correo_cte"],
-                $_POST["ser_dom_cte"],
+                $ser_dom_cte,
                 $_POST["cp_cte"],
                 $_POST["estado_cte"],
                 $_POST["alc_mun_cte"],
