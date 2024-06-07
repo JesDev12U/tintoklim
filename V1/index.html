@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro | Tintoklim</title>
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./avisos.css" />
   </head>
   <body>
     <header>
@@ -19,10 +20,18 @@
     <div class="loader-container" style="display: none">
       <span class="loader"></span>
     </div>
+    <div class="aviso-exito">
+      <h1>Aviso</h1>
+      <p>Registro completado con éxito</p>
+    </div>
+    <div class="aviso-fracaso">
+      <h1>Aviso</h1>
+      <p>Error para completar el registro</p>
+    </div>
     <div class="container visible">
       <div class="title">Registro de clientes</div>
       <h5>Los campos con * son obligatorios</h5>
-      <form action="" method="POST">
+      <form action="./registro.php" method="POST">
         <div class="user-details">
           <div class="input-box">
             <span class="details">Nombre(s) *</span>
@@ -106,7 +115,12 @@
           </div>
         </div>
         <div class="button">
-          <input type="submit" value="Registrar" id="submit-form" />
+          <input
+            type="submit"
+            value="Registrar"
+            id="submit-form"
+            name="registro"
+          />
         </div>
       </form>
     </div>
@@ -204,5 +218,6 @@
     </div>
     <script src="./script.js"></script>
     <script src="./nav.js"></script>
+    <script src="./registro.js"></script>
   </body>
 </html>
