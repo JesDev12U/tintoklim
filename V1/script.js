@@ -26,6 +26,7 @@ const errorCP = document.getElementById("error-cp");
 const loaderContainer = document.querySelector(".loader-container");
 
 const servDomContainer = document.querySelector(".serv-dom-container");
+const container = document.querySelector(".container");
 
 const checkSubmit = () => {
   if (
@@ -159,6 +160,19 @@ serDomSi.addEventListener("change", function (e) {
     CP.required = true;
     checkSubmit();
     servDomContainer.classList.add("visible");
+    container.style.transform = "scale(0.85)";
+
+    let mediaQuery = window.matchMedia(
+      "(max-width: 584px), (max-height: 765px)"
+    );
+
+    function handleScreenChange(e) {
+      if (e.matches && serDomSi.checked) container.style.transform = "scale(1)";
+      else container.style.transform = "scale(0.85)";
+    }
+    mediaQuery.addEventListener("change", handleScreenChange);
+
+    handleScreenChange(mediaQuery);
   }
 });
 
@@ -169,6 +183,7 @@ serDomNo.addEventListener("change", function (e) {
     CP.required = false;
     checkSubmit();
     servDomContainer.classList.remove("visible");
+    container.style.transform = "scale(1)";
   }
 });
 

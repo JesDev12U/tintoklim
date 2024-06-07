@@ -15,6 +15,37 @@ body {
     overflow-y: hidden;
 }
 
+header {
+    position: fixed;
+    display: flex;
+    justify-content: space-between; /* Añade esta línea */
+    top: 0;
+    width: 100vw;
+    padding: 20px;
+    background-color: #ffffff9d;
+    backdrop-filter: blur(15px);
+}
+
+header nav ul li {
+    position: relative;
+    list-style: none;
+    float: left;
+}
+
+header nav ul li a {
+    display: inline-block;
+    padding: 10px 10px;
+    text-decoration: none;
+    color: #000;
+    transition: 0.5s all;
+}
+
+.active {
+    background: #9b59b6;
+    color: #fff;
+    border-radius: 50px;
+}
+
 .loader {
     width: 48px;
     height: 48px;
@@ -45,12 +76,20 @@ body {
     }
 } 
 
-.container {
-    max-width: 700px;
-    width: 100%;
+.container,
+.busqueda-container {
     background-color: #fff;
     padding: 25px 30px;
     border-radius: 5px;
+    margin-top: 50px;
+    display: none;
+}
+
+.container.visible,
+.busqueda-container.visible {
+    max-width: 700px;
+    width: 100%;
+   display: block;
 }
 
 .container .title {
@@ -65,7 +104,7 @@ body {
     left: 0;
     bottom: 0;
     height: 3px;
-    width: 30px;
+    width: 230px;
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
 
@@ -174,36 +213,6 @@ form .button input:disabled {
     cursor: not-allowed;
 }
 
-@media (max-width: 584px), (max-height: 765px) {
-    .container {
-        max-width: 100%;
-    }
-
-    form .user-details .input-box,
-    form .serv-dom-container .input-box {
-        margin-bottom: 15px;
-        width: 100%;
-    }
-
-    form .serv-dom .decision-container {
-        width: 100%;
-    }
-
-    .container form {
-        max-height: 300px;
-        overflow-y: scroll;
-    }
-
-    .container::-webkit-scrollbar {
-        width: 0;
-    }
-}
-
-.label-error {
-    color: red;
-    font-size: 0.8em;
-}
-
 .serv-dom-container {
     height: 0;
     opacity: 0;
@@ -217,6 +226,47 @@ form .button input:disabled {
     height: auto;
     transition: all 0.7s;
 }
+
+@media (max-width: 584px), (max-height: 765px) {
+    .container {
+        max-width: 100%;
+        height: auto;
+    }
+
+    form .user-details .input-box,
+    form .serv-dom-container .input-box {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    form .serv-dom .decision-container {
+        width: 100%;
+    }
+
+    .container form {
+        max-height: 400px;
+        overflow-y: scroll;
+    }
+
+    .container::-webkit-scrollbar {
+        width: 0;
+    }
+
+    .serv-dom-container {
+        display: none;
+    }
+    
+    .serv-dom-container.visible {
+        display: flex;
+    }
+    
+}
+
+.label-error {
+    color: red;
+    font-size: 0.8em;
+}
+
 
 select#colonia {
     width: 100%;
