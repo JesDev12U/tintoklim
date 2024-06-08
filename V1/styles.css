@@ -326,7 +326,7 @@ select#colonia option:checked {
 
 .search-container::before {
     content: "";
-    background: url('./assets/img/search-icon.jpg') no-repeat center center;
+    background: url('./assets/img/lupa-icon.svg') no-repeat center center;
     background-size: 30px 40px;
     position: absolute;
     right: 10px;
