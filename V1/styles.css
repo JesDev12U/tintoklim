@@ -343,6 +343,10 @@ button {
 
 .user-info {
     padding: 20px;
-    max-height: 500px;
+    max-height: 50vh;
     overflow-y: scroll;
+}
+
+.container {
+    max-height: 80vh;
 }
