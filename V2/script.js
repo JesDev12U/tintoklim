@@ -86,7 +86,7 @@ CP.addEventListener("keypress", function (e) {
 });
 
 nombre.addEventListener("input", function (e) {
-  this.value = formatStr(this.value);
+  this.value = formatStr(this.value).replace(/[^a-zA-Z\s]/g, "");
   checkSubmit();
 
   if (this.value.length > 60) {
@@ -100,7 +100,7 @@ nombre.addEventListener("change", function (e) {
 });
 
 apellidos.addEventListener("input", function (e) {
-  this.value = formatStr(this.value);
+  this.value = formatStr(this.value).replace(/[^a-zA-Z\s]/g, "");
   checkSubmit();
 
   if (this.value.length > 60) {
@@ -150,7 +150,7 @@ calle.addEventListener("input", function (e) {
   if (this.value.length > 30) {
     this.value = this.value.slice(0, 30);
   }
-  this.value = formatStr(this.value);
+  this.value = formatStr(this.value).replace(/[^a-zA-Z0-9\s]/g, "");
   checkSubmit();
 
   errorCalle.textContent = calle.value === "" ? "Campo obligatorio" : "";
@@ -165,7 +165,7 @@ nExt.addEventListener("keypress", function (e) {
 });
 
 nExt.addEventListener("input", function (e) {
-  this.value = formatStr(this.value);
+  this.value = formatStr(this.value).replace(/[^a-zA-Z0-9\s-_\.]/g, "");
   checkSubmit();
 
   errorNExt.textContent = nExt.value === "" ? "Campo obligatorio" : "";
@@ -180,7 +180,7 @@ nInt.addEventListener("keypress", function (e) {
 });
 
 nInt.addEventListener("input", function (e) {
-  this.value = formatStr(this.value);
+  this.value = formatStr(this.value).replace(/[^a-zA-Z0-9\s-_\.]/g, "");
   checkSubmit();
 });
 
