@@ -54,7 +54,7 @@ $submitForm.addEventListener("click", (e) => {
         let dataError = data.errores.split(" ");
         if (dataError[0] === "Duplicate")
           $avisoFracasoP.textContent = `El campo ${dataError[2]} ya está en uso`;
-        else $avisoFracasoP.textContent = data.error || "Error desconocido";
+        else $avisoFracasoP.textContent = data.errores || "Error desconocido";
         $avisoFracaso.classList.add("visible");
 
         setTimeout(() => {
