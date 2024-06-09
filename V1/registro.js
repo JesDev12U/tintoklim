@@ -53,7 +53,11 @@ $submitForm.addEventListener("click", (e) => {
       } else {
         let dataError = data.errores.split(" ");
         if (dataError[0] === "Duplicate")
-          $avisoFracasoP.textContent = `El campo ${dataError[2]} ya está en uso`;
+          $avisoFracasoP.textContent = `El ${
+            isCorrectPhoneNumber(dataError[2].replace(/'/g, ""))
+              ? "teléfono"
+              : "correo electrónico"
+          } ya está en uso`;
         else $avisoFracasoP.textContent = data.errores || "Error desconocido";
         $avisoFracaso.classList.add("visible");
 

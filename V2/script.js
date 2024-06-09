@@ -54,7 +54,6 @@ const formatStr = (str) =>
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/\s+/g, " ")
-    .replace(/[^\w\s]/gi, "")
     .toUpperCase();
 
 const formatStrComplete = (str) => str.trim();
