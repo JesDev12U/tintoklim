@@ -58,7 +58,7 @@ const formatStrComplete = (str) => str.trim();
 const formatEmail = (email) => email.trim().toLowerCase();
 
 const isCorrectEmail = (email) => {
-  const regex = /^[a-zA-Z0-9]+(?:[\w-]*[\w])*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,7}$/;
+  const regex = /^[a-zA-Z0-9]+[\w.-]*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,7}$/;
   return regex.test(email);
 };
 
