@@ -360,3 +360,13 @@ button {
     max-height: 75vh;
     overflow: auto;
 }
+
+@media (max-height: 670px) {
+    .container form {
+        max-height: 65vh;
+    }
+
+    .user-info {
+        max-height: 45vh;
+    }
+}
