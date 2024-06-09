@@ -33,16 +33,7 @@ const clearUserInfo = () => {
   userInfoNInt.value = "";
 };
 
-miBusqueda.addEventListener("input", function (e) {
-  errorBusqueda.textContent =
-    miBusqueda.value === "" ? "Campo obligatorio" : "";
-  if (miBusqueda.value !== "") btnBusqueda.disabled = false;
-  else btnBusqueda.disabled = true;
-});
-
-miBusqueda.addEventListener("keypress", () => clearUserInfo());
-
-btnBusqueda.addEventListener("click", (e) => {
+function handlerBtnBusqueda(e) {
   e.preventDefault();
   let xhr = new XMLHttpRequest();
   xhr.open("POST", "./busqueda.php", true);
@@ -90,4 +81,23 @@ btnBusqueda.addEventListener("click", (e) => {
 
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xhr.send("criterio=" + encodeURIComponent(miBusqueda.value));
+}
+
+miBusqueda.addEventListener("input", function (e) {
+  if (miBusqueda.value !== "") btnBusqueda.disabled = false;
+  else btnBusqueda.disabled = true;
 });
+
+miBusqueda.addEventListener("keydown", (e) => {
+  if (
+    e.key === "Backspace" ||
+    e.key === "Delete" ||
+    (e.ctrlKey && e.key === "x")
+  ) {
+    clearUserInfo();
+    errorBusqueda.textContent = "";
+  } else if (e.key !== "Enter") clearUserInfo();
+  if (e.key === "Enter") handlerBtnBusqueda(e);
+});
+
+btnBusqueda.addEventListener("click", handlerBtnBusqueda);
