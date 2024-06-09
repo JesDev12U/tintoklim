@@ -49,7 +49,7 @@ $submitForm.addEventListener("click", (e) => {
         setTimeout(() => {
           $avisoExito.classList.remove("visible");
           clearForm();
-        }, 4000);
+        }, 2000);
       } else {
         let dataError = data.errores.split(" ");
         if (dataError[0] === "Duplicate")
@@ -59,7 +59,7 @@ $submitForm.addEventListener("click", (e) => {
 
         setTimeout(() => {
           $avisoFracaso.classList.remove("visible");
-        }, 4000);
+        }, 2000);
       }
     } else {
       $avisoFracasoP.textContent = "Error en la solicitud al servidor";
@@ -67,7 +67,7 @@ $submitForm.addEventListener("click", (e) => {
 
       setTimeout(() => {
         $avisoFracaso.classList.remove("visible");
-      }, 4000);
+      }, 2000);
     }
     $loaderContainer.style.display = "none";
   };
@@ -79,7 +79,7 @@ $submitForm.addEventListener("click", (e) => {
 
     setTimeout(() => {
       $avisoFracaso.classList.remove("visible");
-    }, 4000);
+    }, 2000);
   };
 
   const data = new URLSearchParams();
