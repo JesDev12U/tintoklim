@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro | Tintoklim</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./avisos.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Tintoklim</h1>
+      <nav>
+        <ul>
+          <li><a href="#" class="active" id="nav-registro">Registro</a></li>
+          <li><a href="#" id="nav-busqueda">Búsqueda</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="loader-container" style="display: none">
+      <span class="loader"></span>
+    </div>
+    <div class="aviso-exito">
+      <h1>Aviso</h1>
+      <p>Registro completado con éxito</p>
+    </div>
+    <div class="aviso-fracaso">
+      <h1>Aviso</h1>
+      <p>Error para completar el registro</p>
+    </div>
+    <div class="container visible">
+      <div class="title">Registro de clientes</div>
+      <h5>Los campos con * son obligatorios</h5>
+      <form action="./registro.php" method="POST">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Nombre(s) *</span>
+            <input type="text" name="nombre_cte" id="nombre" required />
+            <label class="label-error" id="error-nom"></label>
+          </div>
+          <div class="input-box">
+            <span class="details">Apellido(s) *</span>
+            <input type="text" name="apellido_cte" id="apellidos" required />
+            <label class="label-error" id="error-apellidos"></label>
+          </div>
+          <div class="input-box">
+            <span class="details">Correo electrónico *</span>
+            <input type="text" name="correo_cte" id="correo-e" required />
+            <label class="label-error" id="error-correo"></label>
+          </div>
+          <div class="input-box">
+            <span class="details">Teléfono *</span>
+            <input type="text" name="telefono_cte" id="telefono" required />
+            <label class="label-error" id="error-telefono"></label>
+          </div>
+          <div class="serv-dom">
+            <input
+              type="radio"
+              name="ser_dom_cte"
+              value="true"
+              id="ser-dom-si"
+            />
+            <input
+              type="radio"
+              name="ser_dom_cte"
+              value="false"
+              id="ser-dom-no"
+              checked
+            />
+            <div class="serv-dom-title">Servicio a domicilio *</div>
+            <div class="decision-container">
+              <label for="ser-dom-si">
+                <span class="dot one"></span>
+                <span class="decision">Si</span>
+              </label>
+              <label for="ser-dom-no">
+                <span class="dot two"></span>
+                <span class="decision">No</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="serv-dom-container">
+          <div class="input-box">
+            <span class="details">Calle *</span>
+            <input type="text" name="calle_cte" id="calle" />
+            <label class="label-error" id="error-calle"></label>
+          </div>
+          <div class="input-box">
+            <span class="details">Número exterior *</span>
+            <input type="text" name="no_ext_cte" id="n-ext" />
+            <label class="label-error" id="error-n-ext"></label>
+          </div>
+          <div class="input-box">
+            <span class="details">Número interior</span>
+            <input type="text" name="no_int_cte" id="n-int" />
+          </div>
+          <div class="input-box">
+            <span class="details">Código postal *</span>
+            <input type="text" name="cp-cte" id="cp" />
+            <label class="label-error" id="error-cp"></label>
+          </div>
+          <div class="input-box">
+            <span class="details">Estado *</span>
+            <input type="text" name="estado_cte" id="estado" readonly />
+          </div>
+          <div class="input-box">
+            <span class="details">Alcaldía/Municipio *</span>
+            <input type="text" name="alc_mun_cte" id="alc-mun" readonly />
+          </div>
+          <div class="input-box">
+            <span class="details">Colonia *</span>
+            <select name="col_cte" id="colonia"></select>
+          </div>
+        </div>
+        <div class="button">
+          <input
+            type="submit"
+            value="Registrar"
+            id="submit-form"
+            name="registro"
+          />
+        </div>
+      </form>
+    </div>
+    <div class="busqueda-container">
+      <div class="title">Búsqueda de clientes</div>
+      <div class="search-container">
+        <input
+          type="text"
+          id="miBusqueda"
+          placeholder="Teclee un teléfono o un correo electrónico"
+        />
+        <label class="label-error" id="error-busqueda"></label>
+        <button id="btn-busqueda" disabled>Buscar</button>
+      </div>
+
+      <div class="user-info">
+        <p>ID</p>
+        <input type="text" class="user-info-input" readonly id="user-info-id" />
+        <p>Nombre(s)</p>
+        <input
+          type="text"
+          class="user-info-input"
+          readonly
+          id="user-info-nombre"
+        />
+        <p>Apellido(s)</p>
+        <input
+          type="text"
+          class="user-info-input"
+          readonly
+          id="user-info-apellido"
+        />
+        <p>Teléfono</p>
+        <input
+          type="text"
+          class="user-info-input"
+          readonly
+          id="user-info-telefono"
+        />
+        <p>Correo electrónico</p>
+        <input
+          type="text"
+          class="user-info-input"
+          readonly
+          id="user-info-correo"
+        />
+        <p>Servicio a domicilio</p>
+        <input
+          type="text"
+          class="user-info-input"
+          readonly
+          id="user-info-serdom"
+        />
+        <p>Código postal</p>
+        <input type="text" class="user-info-input" readonly id="user-info-cp" />
+        <p>Estado</p>
+        <input
+          type="text"
+          class="user-info-input"
+          readonly
+          id="user-info-estado"
+        />
+        <p>Alcaldía o Municipio</p>
+        <input
+          type="text"
+          class="user-info-input"
+          readonly
+          id="user-info-alcmun"
+        />
+        <p>Colonia</p>
+        <input
+          type="text"
+          class="user-info-input"
+          readonly
+          id="user-info-col"
+        />
+        <p>Calle</p>
+        <input
+          type="text"
+          class="user-info-input"
+          readonly
+          id="user-info-calle"
+        />
+        <p>Número exterior</p>
+        <input
+          type="text"
+          class="user-info-input"
+          readonly
+          id="user-info-next"
+        />
+        <p>Número interior</p>
+        <input
+          type="text"
+          class="user-info-input"
+          readonly
+          id="user-info-nint"
+        />
+      </div>
+    </div>
+    <script src="./script.js"></script>
+    <script src="./nav.js"></script>
+    <script src="./registro.js"></script>
+    <script src="./busqueda.js"></script>
+  </body>
+</html>

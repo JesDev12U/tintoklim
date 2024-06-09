@@ -1,3 +1,6 @@
+//API para los codigos postales de México
+const API_URL = "https://sepomex.icalialabs.com/api/v1/zip_codes";
+
 const MAX_LENGTH_NUMS = 10;
 
 const nombre = document.getElementById("nombre");
@@ -51,6 +54,7 @@ const formatStr = (str) =>
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/\s+/g, " ")
+    .replace(/[^\w\s]/gi, "")
     .toUpperCase();
 
 const formatStrComplete = (str) => str.trim();
@@ -222,17 +226,13 @@ CP.addEventListener("input", function (e) {
   errorCP.textContent = CP.value === "" ? "Campo obligatorio" : "";
   if (this.value.length === 5) {
     colonias.innerHTML = "";
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "./cp.php", true);
-    xhr.responseType = "json";
+    loaderContainer.style.display = "flex";
+    fetch(`${API_URL}?zip_code=${this.value}`)
+      .then((response) => response.json())
+      .then((data) => {
+        colonias.innerHTML = "";
 
-    xhr.onload = function () {
-      loaderContainer.style.display = "flex";
-      if (xhr.status === 200) {
-        errorCP.textContent = "";
-        let data = xhr.response;
-        submitForm.disabled = false;
-        if (data.length === 0) {
+        if (data.zip_codes.length === 0) {
           errorCP.textContent = "El CP ingresado no existe";
           loaderContainer.style.display = "none";
           clearServDom();
@@ -241,28 +241,16 @@ CP.addEventListener("input", function (e) {
           return;
         }
 
-        data.forEach((el) => {
-          estado.value = formatStr(el.estado);
-          alcMun.value = formatStr(el.alc_mun);
+        data.zip_codes.forEach((zip_code) => {
+          estado.value = formatStr(zip_code.d_estado);
+          alcMun.value = formatStr(zip_code.d_mnpio);
           let option = document.createElement("option");
-          option.text = option.value = formatStr(el.col);
+          option.text = option.value = formatStr(zip_code.d_asenta);
           colonias.appendChild(option);
         });
         checkSubmit();
-      } else {
-        errorCP.textContent("Error: " + xhr.status);
-      }
-      loaderContainer.style.display = "none";
-    };
-
-    xhr.onerror = function () {
-      loaderContainer.style.display = "none";
-      errorCP.textContent("Error en la solicitud al servidor");
-    };
-
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    xhr.send("cp=" + encodeURIComponent(CP.value));
+        loaderContainer.style.display = "none";
+      });
   } else {
     clearServDom();
   }
