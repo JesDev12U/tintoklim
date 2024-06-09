@@ -103,7 +103,7 @@ header nav ul li a {
     content: '';
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: -3px;
     height: 3px;
     width: 230px;
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
@@ -342,12 +342,21 @@ button {
     margin-top: 10px;
 }
 
+.busqueda-container {
+    max-height: 80vh;
+}
+
 .user-info {
     padding: 20px;
-    max-height: 50vh;
+    max-height: 60vh;
     overflow-y: scroll;
 }
 
 .container {
-    max-height: 80vh;
+    max-height: 85vh;
+}
+
+.container form {
+    max-height: 75vh;
+    overflow: auto;
 }
