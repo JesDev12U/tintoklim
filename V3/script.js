@@ -58,7 +58,7 @@ const formatStrComplete = (str) => str.trim();
 const formatEmail = (email) => email.trim().toLowerCase();
 
 const isCorrectEmail = (email) => {
-  const regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+  const regex = /^[a-zA-Z0-9]+(?:[\w-]*[\w])*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,7}$/;
   return regex.test(email);
 };
 
@@ -112,7 +112,7 @@ apellidos.addEventListener("change", function (e) {
 
 correoE.addEventListener("input", function (e) {
   this.value = this.value
-    .replace(/[^a-zA-Z0-9@.]/g, "")
+    .replace(/[^a-zA-Z0-9@.\-_]/g, "")
     .replace(/\.{2,}/g, ".") // Elimina puntos consecutivos
     .toLowerCase()
     .trim();
